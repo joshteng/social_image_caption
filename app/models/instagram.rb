@@ -2,7 +2,7 @@ class Instagram
   include HTTParty
 
   def self.retrieve_popular_images
-    response = HTTParty.get('https://api.instagram.com/v1/media/popular?access_token=8245362.1fb234f.1d5692912cc048cebdf216211762c378')
+    response = HTTParty.get("https://api.instagram.com/v1/media/popular?access_token=#{ENV['ACCESS_TOKEN']}")
     images = []
 
     response['data'].each do |image|
@@ -10,6 +10,4 @@ class Instagram
     end
     images.each { |i| Image.create(source_url: i) }
   end
-  # respond['data'][0]['images']['standard_resolution']['url']
-
 end
